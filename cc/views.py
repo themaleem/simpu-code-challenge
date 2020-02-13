@@ -45,3 +45,16 @@ class SingleExcursion(APIView):
 
         data=ExcursionSerializer(excursion).data
         return Response(data, status=status.HTTP_200_OK)
+
+class CreateExcursion(APIView):
+    # permission_classes = (IsAuthenticated,)
+    serializer_class = ExcursionSerializer
+
+    def post(self, request):
+        data = {
+        }
+        serializer = ExcursionSerializer(data=data)
+        if serializer.is_valid():
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
