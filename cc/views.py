@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import ExcursionSerializer
 from rest_framework.views import APIView
+from rest_framework import status
 
 
 # def hello(request):
@@ -20,7 +21,27 @@ class HelloView(APIView):
 
 
 class ExcursionList(APIView):
+    #protecting views from users without access token
+    permission_classes = (IsAuthenticated,)
+    
     def get(self,request):
-        excursions=Excursion.objects.all()
+        # excursions=Excursion.objects.()
+        
+        # using raw sql query commands
+        excursions=Excursion.objects.raw('SELECT * FROM cc_excursion WHERE 1')
+
         data=ExcursionSerializer(excursions,many=True).data
-        return Response(data)
+        return Response(data, status=status.HTTP_200_OK)
+
+class SingleExcursion(APIView):
+    #protecting views from users without access token
+    # permission_classes = (IsAuthenticated,)
+    
+    def get(self,request,id):
+        excursion=Excursion.objects.get(id=id)
+        
+        # using raw sql query commands
+        # excursion=Excursion.objects.raw(f"SELECT * FROM cc_excursion WHERE id={id}")
+
+        data=ExcursionSerializer(excursion).data
+        return Response(data, status=status.HTTP_200_OK)

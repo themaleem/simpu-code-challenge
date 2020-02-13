@@ -9,4 +9,5 @@ urlpatterns = [
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('', views.HelloView.as_view(), name='hello'),
     path('api', views.ExcursionList.as_view(), name='api'),
+    path('api/<int:id>', views.SingleExcursion.as_view(), name='single_exc'),
 ]
