@@ -22,3 +22,7 @@ class SingleExcursion(generics.RetrieveDestroyAPIView):
     queryset=Excursion.objects.all()
     serializer_class=ExcursionSerializer
 
+class PutExcursion(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = Excursion.objects.all()
+    serializer_class = ExcursionSerializer

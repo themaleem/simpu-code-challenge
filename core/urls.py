@@ -12,6 +12,7 @@ urlpatterns = [
         path('<int:pk>', views.SingleExcursion.as_view(), name='single_exc'),
         path('token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
         path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+        path('excursion/update/<int:pk>/', EditExcursion.as_view(), name='update'),
         path('docs/', include_docs_urls(title='SIMPU code-challenge API Build')) #api documentation
         ])
     ),
