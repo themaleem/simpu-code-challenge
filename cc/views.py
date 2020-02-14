@@ -1,11 +1,8 @@
-# from django.shortcuts import render
-# from django.http import HttpResponse
 from .models import Excursion
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import ExcursionSerializer
-from rest_framework.views import APIView
 from rest_framework import status,generics
 
 class ExcursionList(generics.ListCreateAPIView):
@@ -20,8 +17,8 @@ class ExcursionList(generics.ListCreateAPIView):
     serializer_class=ExcursionSerializer
 
 class SingleExcursion(generics.RetrieveDestroyAPIView):
-    #protecting views from users without access token
     permission_classes = (IsAuthenticated,)
     
     queryset=Excursion.objects.all()
     serializer_class=ExcursionSerializer
+
